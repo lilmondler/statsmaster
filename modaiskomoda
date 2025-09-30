@@ -23,9 +23,9 @@ stat_mode <- function(x, na.rm = TRUE, denom = c("nonmissing", "all")) {
   vals <- type.convert(vals, as.is = TRUE)   # преобразовать строки в числа, если можно
   
 
-  counts <- as.numeric(tab[idx])
+  mode_freq <- as.numeric(tab[idx])
   
-  total_count <- sum(counts)
+  total_count <- sum(mode_freq)
 
   share <- total_count / n_total * 100
 
