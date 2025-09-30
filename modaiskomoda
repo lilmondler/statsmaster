@@ -11,17 +11,14 @@ stat_mode <- function(x, na.rm = TRUE, denom = c("nonmissing", "all")) {
                       stringsAsFactors = FALSE, row.names = NULL))
   }
   
-
   tab <- table(x_in, useNA = "no")
   
 
   maxf <- max(tab)
   idx  <- which(tab == maxf)
   
- 
   vals <- names(tab)[idx]
-  vals <- type.convert(vals, as.is = TRUE)   # преобразовать строки в числа, если можно
-  
+  vals <- type.convert(vals, as.is = TRUE)  
 
   mode_freq <- as.numeric(tab[idx])
   
@@ -34,8 +31,8 @@ stat_mode <- function(x, na.rm = TRUE, denom = c("nonmissing", "all")) {
 
   out <- data.frame(
     value = val_str,
-    count = total_count,
-    share_percent = share,
+    mode_frequency = total_count,
+    mode_percent = share,
     stringsAsFactors = FALSE,
     row.names = NULL
   )
