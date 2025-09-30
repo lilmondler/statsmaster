@@ -1,3 +1,4 @@
+library(scales)
 stat_mode <- function(x, na.rm = TRUE, denom = c("na.rm", "all")) {
   denom <- match.arg(denom)
   n_na <- sum(is.na(x))
@@ -32,7 +33,7 @@ stat_mode <- function(x, na.rm = TRUE, denom = c("na.rm", "all")) {
   out <- data.frame(
     value = val_str,
     mode_frequency = total_count,
-    mode_percent = share "%",
+    mode_percent = percent(share/100, accuracy = 0.1),
     stringsAsFactors = FALSE,
     row.names = NULL
   )
