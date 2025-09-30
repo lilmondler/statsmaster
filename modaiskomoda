@@ -1,4 +1,4 @@
-stat_mode <- function(x, na.rm = TRUE, denom = c("nonmissing", "all")) {
+stat_mode <- function(x, na.rm = TRUE, denom = c("na.rm", "all")) {
   denom <- match.arg(denom)
   n_na <- sum(is.na(x))
   x_in <- if (na.rm) x[!is.na(x)] else x
