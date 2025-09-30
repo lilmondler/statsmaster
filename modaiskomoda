@@ -32,7 +32,7 @@ stat_mode <- function(x, na.rm = TRUE, denom = c("na.rm", "all")) {
   out <- data.frame(
     value = val_str,
     mode_frequency = total_count,
-    mode_percent = share,
+    mode_percent = share "%",
     stringsAsFactors = FALSE,
     row.names = NULL
   )
