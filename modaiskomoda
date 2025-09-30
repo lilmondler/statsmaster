@@ -1,0 +1,44 @@
+stat_mode <- function(x, na.rm = TRUE, denom = c("nonmissing", "all")) {
+  denom <- match.arg(denom)
+  n_na <- sum(is.na(x))
+  x_in <- if (na.rm) x[!is.na(x)] else x
+
+  n_nonmiss <- length(x_in)
+  n_total   <- if (denom == "all") n_nonmiss + n_na else n_nonmiss
+  
+  if (n_total == 0 || n_nonmiss == 0) {
+    return(data.frame(value = NA, count = 0, share_percent = NA_real_, 
+                      stringsAsFactors = FALSE, row.names = NULL))
+  }
+  
+
+  tab <- table(x_in, useNA = "no")
+  
+
+  maxf <- max(tab)
+  idx  <- which(tab == maxf)
+  
+ 
+  vals <- names(tab)[idx]
+  vals <- type.convert(vals, as.is = TRUE)   # преобразовать строки в числа, если можно
+  
+
+  counts <- as.numeric(tab[idx])
+  
+  total_count <- sum(counts)
+
+  share <- total_count / n_total * 100
+
+  val_str <- paste(vals, collapse = ", ")
+  
+
+  out <- data.frame(
+    value = val_str,
+    count = total_count,
+    share_percent = share,
+    stringsAsFactors = FALSE,
+    row.names = NULL
+  )
+  attr(out, "n_total") <- n_total
+  out
+}
